@@ -1,0 +1,15 @@
+/* Ajusta el tamaño del card */
+.custom-card {
+    max-width: 500px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: 0 auto;   /* Centra el card horizontalmente */
+  }
+  
+  /* Aumenta el tamaño de las etiquetas y campos de entrada */
+  .custom-label {
+    font-size: 1.25rem; /* Ajusta el tamaño de la fuente según tus necesidades */
+  }
+  
+  .custom-input {
+    font-size: 1.25rem; /* Ajusta el tamaño de la fuente en los campos de entrada */
+  }
+  

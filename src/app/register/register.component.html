@@ -1,0 +1,23 @@
+<div class="container pt-4 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h2>Registro</h2>
+        <form (ngSubmit)="register()">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="user.nombre" name="nombre" required class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="email" id="correo" [(ngModel)]="user.correo" name="correo" required class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="contraseña" class="form-label">Contraseña:</label>
+            <input type="password" id="contraseña" [(ngModel)]="user.contraseña" name="contraseña" required class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
