@@ -7,7 +7,7 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user = { nombre: '', contraseña: '' };
+  user = { nombre: '', contrasena: '' };
 
   constructor(private authService: AuthService) { }
 

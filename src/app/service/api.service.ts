@@ -25,11 +25,11 @@ export class ApiService {
   deleteUser (id: number): Observable<any> {
     return this.http.delete(this.apiUrl, {body : {id}});
   }
-  register(user: { nombre: string, contraseña: string, correo: string }): Observable<any> {
+  register(user: { nombre: string, contrasena: string, correo: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register.php`, user);
   }
 
-  login(user: { nombre: string, contraseña: string }): Observable<any> {
+  login(user: { nombre: string, contrasena: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login.php`, user);
   }
 

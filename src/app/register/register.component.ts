@@ -7,12 +7,12 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user = { nombre: '', contraseña: '', correo: '' };
+  usuarios = { nombre: '', contrasena: '', correo: '' };
 
   constructor(private authService: AuthService) { }
 
   register(): void {
-    this.authService.register(this.user).subscribe(response => {
+    this.authService.register(this.usuarios).subscribe(response => {
       if (response.status === 'success') {
         alert('¡Registro exitoso!');
       } else {
