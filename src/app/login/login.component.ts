@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,17 +8,22 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user = { nombre: '', contrasena: '' };
+  usuarios = { correo: '', contrasena: '' };
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    this.authService.login(this.user).subscribe(response => {
-      if (response.status === 'success') {
-        alert('¡Inicio de sesión exitoso!');
-        // Aquí puedes redirigir al usuario a otra página o almacenar el token en el local storage
-      } else {
-        alert('¡Error al iniciar sesión!');
+    this.authService.login(this.usuarios).subscribe({
+      next: response => {
+        if (response.success) {
+          alert('¡Inicio de sesión exitoso!');
+          this.router.navigate(['/user-list']); // Redirige a /user-list
+        } else {
+          alert('¡Error al iniciar sesión: ' + response.message + '!');
+        }
+      },
+      error: err => {
+        alert('Error en la comunicación con el servidor: ' + err.message);
       }
     });
   }
