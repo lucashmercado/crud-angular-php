@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +11,24 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   usuarios = { correo: '', contrasena: '' };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   login(): void {
     this.authService.login(this.usuarios).subscribe({
       next: response => {
         if (response.success) {
-          alert('¡Inicio de sesión exitoso!');
+          //alert('¡Inicio de sesión exitoso!');
+          this.toastr.success('¡Inicio de sesión exitoso!');
+          
           this.router.navigate(['/user-list']); // Redirige a /user-list
         } else {
-          alert('¡Error al iniciar sesión: ' + response.message + '!');
+         // alert('¡Error al iniciar sesión: ' + response.message + '!');
+          this.toastr.error('¡Error al iniciar sesión: ' + response.message + '!');
         }
       },
       error: err => {
-        alert('Error en la comunicación con el servidor: ' + err.message);
+       // alert('Error en la comunicación con el servidor: ' + err.message);
+        this.toastr.error('Error en la comunicación con el servidor: ' + err.message);
       }
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../service/api.service'; // Asegúrate de que la ruta sea correcta
+import { ApiService } from '../service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -7,24 +8,42 @@ import { ApiService } from '../service/api.service'; // Asegúrate de que la rut
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: any[] = []; // Asegúrate de que esta propiedad esté inicializada
+  users: any[] = [];
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.loadUsers(); // Carga la lista de usuarios al inicializar el componente
+    this.loadUsers();
   }
 
   loadUsers(): void {
-    this.apiService.getusers().subscribe((data: any[]) => {
-      this.users = data; // Asigna los datos a la propiedad users
-    });
+    this.apiService.getusers().subscribe(
+      (data: any[]) => {
+        console.log('Usuarios cargados:', data); // Para debugging
+        this.users = data;
+      },
+      error => {
+        console.error('Error al cargar usuarios:', error);
+      }
+    );
   }
 
   deleteUser(userId: number): void {
-    this.apiService.deleteUser(userId).subscribe(() => {
-      this.loadUsers(); // Recarga la lista de usuarios después de eliminar
-    });
+    this.apiService.deleteUser(userId).subscribe(
+      () => {
+        this.loadUsers();
+      },
+      error => {
+        console.error('Error al eliminar usuario:', error);
+      }
+    );
+  }
+
+  editUser(userId: number): void {
+    console.log('Editando usuario:', userId); // Para debugging
+    this.router.navigate(['/user-form', userId]);
   }
 }
-

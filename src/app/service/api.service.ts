@@ -10,21 +10,23 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // Métodos existentes
   getusers(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
-  addUser (user: any): Observable<any> {
+  addUser(user: any): Observable<any> {
     return this.http.post(this.apiUrl, user);
   }
 
-  updateUser (user: any): Observable<any> {
+  updateUser(user: any): Observable<any> {
     return this.http.put(this.apiUrl, user);
   }
 
-  deleteUser (id: number): Observable<any> {
-    return this.http.delete(this.apiUrl, {body : {id}});
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl, { body: { id } });
   }
+
   register(usuarios: { nombre: string, contrasena: string, correo: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register.php`, usuarios);
   }
@@ -33,4 +35,8 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/login.php`, usuarios);
   }
 
+  // Nuevo método para obtener un usuario por ID
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}?id=${id}`);
+  }
 }

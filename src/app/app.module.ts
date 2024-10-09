@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './service/auth.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthService } from './service/auth.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
   providers: [AuthService],

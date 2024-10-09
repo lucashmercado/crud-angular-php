@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
   private apiUrl = 'http://localhost'; // Base URL for your API
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   // Método para registrar un nuevo usuario
   register(usuarios: { nombre: string, contrasena: string, correo: string }): Observable<any> {
@@ -36,6 +37,7 @@ export class AuthService {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('isLoggedIn'); // Elimina el estado de inicio de sesión
       localStorage.removeItem('user'); // Elimina la información del usuario
+      this.toastr.success('¡Hasta pronto!');
     }
   }
 
@@ -43,6 +45,7 @@ export class AuthService {
   isLoggedIn(): boolean {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('isLoggedIn') === 'true';
+      
     }
     return false; // Return false on server-side
   }

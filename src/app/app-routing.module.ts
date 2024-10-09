@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'user-list', component: UserListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'user-form/:id', component: UserFormComponent },
   { path: '**', redirectTo: 'user-list', pathMatch: 'full' }
 ];
 
