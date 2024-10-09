@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +13,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class UserListComponent implements OnInit {
     this.apiService.getusers().subscribe(
       (data: any[]) => {
         console.log('Usuarios cargados:', data); // Para debugging
+       // this.toastr.success('Usuarios cargados exitosamente');
         this.users = data;
       },
       error => {
@@ -35,9 +38,11 @@ export class UserListComponent implements OnInit {
     this.apiService.deleteUser(userId).subscribe(
       () => {
         this.loadUsers();
+        this.toastr.success('Usuario eliminado exitosamente');
       },
       error => {
         console.error('Error al eliminar usuario:', error);
+        this.toastr.error('Error al eliminar el usuario');
       }
     );
   }

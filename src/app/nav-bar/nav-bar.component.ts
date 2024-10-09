@@ -12,5 +12,6 @@ export class NavBarComponent {
   logout(): void {
     this.authService.logout(); // Llama al método logout del servicio
     // Aquí puedes redirigir a la página de inicio o login si es necesario
+    //this.router.navigate(['/login']);
   }
 }
